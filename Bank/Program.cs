@@ -5,3 +5,5 @@ arturAccount.ChangeAcountType(AccountTypeEnum.DEBIT);
 
 arturAccount.WithdrawFunds(90.0m);
 arturAccount.WithdrawFunds(90.0m);
+arturAccount.WithdrawFunds(90.0m);
+arturAccount.WithdrawFunds(90.0m);

@@ -63,6 +63,7 @@ namespace Bank
 
         public void WithdrawFunds(decimal sum)
         {
+            OnActionMade(String.Format(BankLimits.ACTION_MSG_MONEY_TO_WITHDRAW, sum, CurrencyName));
             switch (AccountType)
             {
                 case AccountTypeEnum.DEBIT:

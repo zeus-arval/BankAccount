@@ -20,6 +20,8 @@ namespace Bank
         internal const string ERROR_MSG_INACTIVE_ACCOUNT = "Your account is inactive";
 
         internal const string ACTION_MSG_MONEY_WAS_WITHDRAWN = "{0} {1} was withdrawn from {2} account";
+        internal const string ACTION_MSG_MONEY_TO_WITHDRAW = "{0} {1} was requested to be withdrawn";
+
 
         public static decimal SetMinSumByAccountType(this BankAccount account)
         {
