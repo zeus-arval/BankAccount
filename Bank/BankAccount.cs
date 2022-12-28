@@ -28,8 +28,11 @@ namespace Bank
         }
 
         public string CurrencyName => Sum > 1.0m ? EnumExtensions.GetDescription<CurrencyEnum>(Currency) + "s" : EnumExtensions.GetDescription<CurrencyEnum>(Currency);
+        public string FullName => $"{FirstName} {LastName}";
         public decimal MinPaymentLimit => BankLimits.SetMinSumByAccountType(this);
-        public string PersonName { get; init; }
+
+        public string FirstName { get; private set; }
+        public string LastName { get; private set; }
         public decimal MaxPaymentLimit { get; private set; }
         private CurrencyEnum Currency { get; init; }
         public AccountTypeEnum AccountType { get; private set; }
@@ -51,11 +54,11 @@ namespace Bank
             }
         }
 
-        public BankAccount(decimal sum, string personName, CurrencyEnum currency = CurrencyEnum.EUR)
+        public BankAccount(decimal sum, string firstName, string lastName)
         {
             Sum = sum;
-            PersonName = personName ?? String.Empty;
-            Currency = currency;
+            FirstName = firstName;
+            LastName = lastName;
             Error = new Error();
             Error.ErrorAppeared += HandleError!;
             ActionMade += HandleActionMade!;
@@ -74,7 +77,7 @@ namespace Bank
                     }
 
                     Sum -= sum;
-                    OnActionMade(String.Format(BankLimits.ACTION_MSG_MONEY_WAS_WITHDRAWN, sum, CurrencyName, PersonName));
+                    OnActionMade(String.Format(BankLimits.ACTION_MSG_MONEY_WAS_WITHDRAWN, sum, CurrencyName, FullName));
                     break;
                 case AccountTypeEnum.CREDIT:
                     break;
@@ -121,7 +124,7 @@ namespace Bank
         }
 
         public string GetAccountInfo()
-            => $"Bank Account for {PersonName} has {Sum} {CurrencyName}";
+            => $"Bank Account for {FullName} has {Sum} {CurrencyName}";
 
         public void ChangeAcountType(AccountTypeEnum accountType)
         {
